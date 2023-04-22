@@ -66,7 +66,7 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-@auth.route('/profile')
+@auth.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     if request.method == 'POST':
