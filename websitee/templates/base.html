@@ -30,7 +30,8 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
           {% if user.is_authenticated %} <!-- если в аккаунте-->
-          <a class="nav-item nav-link" id="note" href="/">Notes</a> <!-- заголовки -->
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="note" href="/notes">Notes</a> <!-- заголовки -->
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           <a class="nav-item nav-link" id="profile" href="/profile">Profile</a>
           {% else %} <!-- если не в аккаунте-->
