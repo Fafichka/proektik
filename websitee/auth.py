@@ -74,11 +74,12 @@ def sign_up():
 @auth.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    #if request.method == 'POST':
-    email = request.form.get('email')
-    user = User.query.filter_by(email=email).first()
-    if user:
-        flash('aaaa stan lino', category='success')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('aaaa stan lino', category='success')
+        return redirect(url_for('views.home'))
     dat = (datetime.datetime.now() - current_user.date_join).days
     rang = ""
     if 0 <= dat < 15:
@@ -91,4 +92,10 @@ def profile():
         rang = "приспешник сундундо"
     else:
         rang = "слуга ли минхо"
+
     return render_template("profile.html", user=current_user, dat=dat, rang=rang)
+
+
+@auth.route('/change', methods=['GET', 'POST'])
+@login_required
+def change():
