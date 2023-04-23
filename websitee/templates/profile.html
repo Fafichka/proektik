@@ -1,9 +1,27 @@
 {% extends "base.html" %} {% block title %}stan lee know{% endblock %} {% block content
 %}
+<link rel="stylesheet" href="profile.css">
+
 <form method="POST">
   <h2 align="center">your HO-home</h2>
   </form>
-<div>
-  <h4 align="left">дней вместе с Минхо:</h4>
+
+  <img
+src="https://i.pinimg.com/originals/be/6d/c8/be6dc8f66bfaae498e2c9f9761c89a48.jpg"
+title="Мурка"
+alt="Рыжая кошка валяется в снегу"
+
+>
+
+<div align="left">
+  <p align="justify"><big><b>дней вместе с Минхо:</b></big> {{dat +1}}</p>
+  <p><big><b>старое имя: </b></big>{{user.first_name}}</p>
+  <p><big><b>почта:</b></big> {{user.email}}</p>
+  <p><big><b>новое имя:</b></big> {{user.new_name}}</p>
+  <p><big><b>ранг:</b></big> {{rang}}</p>
+
 </div>
+
+
+
 {% endblock %}

@@ -44,6 +44,7 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
         date_join = datetime.datetime.now()
+        new_name = request.form.get('newName')
         user = User.query.filter_by(email=email).first()
 
         if user:
@@ -56,8 +57,12 @@ def sign_up():
             flash('плиз ты только что ввел прошлый пароль, куда уже неправильно', category='error')
         elif len(password1) < 7:
             flash('коротко как твоя жизнь', category='error')
+        elif len(new_name) < 1:
+            flash('коротко как твоя жизнь', category='error')
+        elif new_name.lower() == first_name.lower():
+            flash('ты такое имя уже писал/а', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'), date_join=date_join)
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'), date_join=date_join, new_name=new_name)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -69,9 +74,21 @@ def sign_up():
 @auth.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        user = User.query.filter_by(email=email).first()
-        if user:
-           flash('aaaa stan lino')
-    return render_template("profile.html", user=current_user)
+    #if request.method == 'POST':
+    email = request.form.get('email')
+    user = User.query.filter_by(email=email).first()
+    if user:
+        flash('aaaa stan lino', category='success')
+    dat = (datetime.datetime.now() - current_user.date_join).days
+    rang = ""
+    if 0 <= dat < 15:
+        rang = "нугу"
+    elif 15 < dat < 31:
+        rang = "мини стэн"
+    elif 31 < dat < 180:
+        rang = "полгода с лино-я"
+    elif 180 < dat < 366:
+        rang = "приспешник сундундо"
+    else:
+        rang = "слуга ли минхо"
+    return render_template("profile.html", user=current_user, dat=dat, rang=rang)

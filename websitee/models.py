@@ -16,4 +16,5 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     date_join = db.Column(db.DateTime(timezone=True), default=func.now())
+    new_name = db.Column(db.String(150))
     notes = db.relationship('Note')
