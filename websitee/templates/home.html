@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Welcome!</h1>
+<div align="left">
+  <p align="justify">Добро пожаловать на сайт, посвященный Лино!</p>
+    <img align="middle"
+src="https://i.pinimg.com/originals/56/7c/93/567c93c31b4969dc795e923d0c63c805.jpg"
+>
+  <p> Зарегистрировавшись здесь, вы приняли новое имя, так что теперь вы не {{user.first_name}}.</p>
+  <p> Вам следует теперь представляться только как {{user.new_name}}!</p>
+  <p><big><b>Желаем вам приятного опыта на нашем ресурсе!</b></big></p>
+</div>
+{% endblock %}

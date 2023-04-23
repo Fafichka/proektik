@@ -92,3 +92,13 @@ def profile():
     else:
         rang = "слуга ли минхо"
     return render_template("profile.html", user=current_user, dat=dat, rang=rang)
+
+
+@auth.route('/', methods=['GET', 'POST'])
+@login_required
+def homepage():
+    email = request.form.get('email')
+    user = User.query.filter_by(email=email).first()
+    if user:
+        flash('привет', category='success')
+    return render_template("profile.html", user=current_user)
