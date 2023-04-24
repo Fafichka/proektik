@@ -76,9 +76,9 @@ def sign_up():
 def profile():
     if request.method == 'POST':
         email = request.form.get('email')
-    user = User.query.filter_by(email=email).first()
-    if user:
-        flash('aaaa stan lino', category='success')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('aaaa stan lino', category='success')
     dat = (datetime.datetime.now() - current_user.date_join).days
     rang = ""
     if 0 <= dat < 15:
@@ -102,3 +102,19 @@ def homepage():
     if user:
         flash('привет', category='success')
     return render_template("home.html", user=current_user)
+
+
+@auth.route('/change', methods=['GET', 'POST'])
+@login_required
+def change():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        new_name = request.form.get('newName')
+        user = User.query.filter_by(email=email).first()
+        #if user:
+
+
+@auth.route('m-i-nfo')
+@login_required
+def info():
+    return render_template("info.html", user=current_user)
