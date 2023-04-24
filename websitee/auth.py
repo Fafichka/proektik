@@ -20,7 +20,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash('мм у тебя уже тут есть акк, добро пожаловать', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+                return redirect(url_for('views.notes'))
             else:
                 flash('лол не вышло', category='error')
         else:
@@ -67,7 +67,7 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('как жаль, ты зарегался, придется добавить тебя в базу данных', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.notes'))
     return render_template("sign_up.html", user=current_user)
 
 

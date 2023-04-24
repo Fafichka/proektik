@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -10,7 +10,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/notes', methods=['GET', 'POST'])
 @login_required
-def home():
+def notes():
     if request.method == 'POST':
         note = request.form.get('note')
         if len(note) < 1:
@@ -24,12 +24,15 @@ def home():
 
 
 @views.route('/delete-note', methods=['POST'])
+@login_required
 def delete_note():
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
-    return jsonify({})
+    if request.method == 'POST':
+        note = json.loads(request.data) # this function expects a JSON from the INDEX.js file
+        noteId = note['noteId']
+        note = Note.query.get(noteId)
+        if note:
+            if note.user_id == current_user.id:
+                db.session.delete(note)
+                db.session.commit()
+                flash('777', category='success')
+    return redirect(request.referrer or url_for('notes'))
