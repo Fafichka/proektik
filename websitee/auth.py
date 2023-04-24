@@ -74,8 +74,8 @@ def sign_up():
 @auth.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    #if request.method == 'POST':
-    email = request.form.get('email')
+    if request.method == 'POST':
+        email = request.form.get('email')
     user = User.query.filter_by(email=email).first()
     if user:
         flash('aaaa stan lino', category='success')
@@ -101,4 +101,4 @@ def homepage():
     user = User.query.filter_by(email=email).first()
     if user:
         flash('привет', category='success')
-    return render_template("profile.html", user=current_user)
+    return render_template("home.html", user=current_user)
