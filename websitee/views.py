@@ -27,7 +27,7 @@ def notes():
 @login_required
 def delete_note():
     if request.method == 'POST':
-        note = json.loads(request.data) # this function expects a JSON from the INDEX.js file
+        note = json.loads(request.data)
         noteId = note['noteId']
         note = Note.query.get(noteId)
         if note:
@@ -35,4 +35,4 @@ def delete_note():
                 db.session.delete(note)
                 db.session.commit()
                 flash('777', category='success')
-    return redirect(request.referrer or url_for('notes'))
+    return render_template("note.html", user=current_user)
