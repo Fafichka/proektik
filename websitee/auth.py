@@ -71,14 +71,9 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
-@auth.route('/profile', methods=['GET', 'POST'])
+@auth.route('/profile')
 @login_required
 def profile():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('aaaa stan lino', category='success')
     dat = (datetime.datetime.now() - current_user.date_join).days
     rang = ""
     if 0 <= dat < 15:

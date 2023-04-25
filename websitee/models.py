@@ -23,5 +23,5 @@ class User(db.Model, UserMixin):
 
 class Userava(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    avatar = db.Column(db.String(150))
+    avatar = db.Column(db.String(150000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
