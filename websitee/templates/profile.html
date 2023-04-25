@@ -6,12 +6,7 @@
   <h2 align="center">your HO-home</h2>
   </form>
 
-  <img
-src="https://i.pinimg.com/originals/be/6d/c8/be6dc8f66bfaae498e2c9f9761c89a48.jpg"
-title="Мурка"
-alt="Рыжая кошка валяется в снегу"
-
->
+<div class="profile-ava"><img src="{(User.user.avatar)}"></div>
 
 <div align="left">
   <p align="justify"><big><b>дней вместе с Минхо:</b></big> {{dat +1}}</p>
@@ -21,8 +16,11 @@ alt="Рыжая кошка валяется в снегу"
   <p><big><b>ранг:</b></big> {{rang}}</p>
 
 </div>
-<form method="POST">
-<button type="submit" class="btn btn-primary">
-  измениться</button>
-</form>
+<form method="post" enctype="multipart/form-data">
+                               <div class="form-group">
+                                    <label for="photo">Выберите файл</label>
+                                    <input type="file" class="form-control-file" id="photo" name="file">
+                                </div>
+                                <button type="submit" class="btn btn-primary">измениться</button>
+                            </form>
 {% endblock %}

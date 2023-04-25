@@ -15,11 +15,13 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .userava import userava
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(userava, url_prefix='/')
 
-    from .models import User, Note
+    from .models import User, Note, Userava
     with app.app_context():
         db.create_all()
 

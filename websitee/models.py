@@ -18,3 +18,10 @@ class User(db.Model, UserMixin):
     date_join = db.Column(db.DateTime(timezone=True), default=func.now())
     new_name = db.Column(db.String(150))
     notes = db.relationship('Note')
+    ava = db.relationship('Userava')
+
+
+class Userava(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    avatar = db.Column(db.String(150))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
